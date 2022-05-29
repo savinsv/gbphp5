@@ -1,11 +1,11 @@
-<?php
+ <?php
 
 /* function __autoload($classname){
 	include_once("controllers/$classname.php");
 }
  */
 spl_autoload_register(function($name){
-	$dirs = ["controllers","models","views"];
+	$dirs = ["controllers","models","views","data"];
 	$file = $name.".php";
 	$check=false;
 	foreach($dirs as $dir){
@@ -22,7 +22,8 @@ spl_autoload_register(function($name){
 //site.ru/index.php?act=auth&c=User
 
 $action = 'action_';
-$action .=(isset($_GET['act'])) ? $_GET['act'] : 'index';
+$action .=(isset($_GET['action'])) ? $_GET['action'] : 'index';
+//echo($action);
 
 switch ($_GET['c'])
 {
