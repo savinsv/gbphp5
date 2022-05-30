@@ -13,6 +13,6 @@
 <!-- 	<textarea name="text"><?=$text?></textarea>
  -->
 	<br/>
-	<input type="submit" value="Вход" />
-	<a href="index.php?c=User&action=reg" >Регистрация</a>
+	<input type="submit" value="Вход" class="btn-link"/>
+	<a href="index.php?c=User&action=reg" class="btn-link">Регистрация</a>
 </form>

@@ -24,6 +24,21 @@ body {
   flex: 0 0 auto;
 }
 
+.btn-link {
+  margin: 10px 20px;
+  display: inline-block;
+  text-decoration: none;
+  padding: 5px 10px;
+  background: #ccc;
+  border: 0px solid #ccc;
+  color: black;
+  border-radius: 3px;
+}
+.btn-link:hover {
+  color: #f00;
+  border-color: #f00;
+  outline: 0.2px solid #f00;
+}
 a {
   color: #00f;
 }
