@@ -1,11 +1,4 @@
 <?php
-/*     define('DB_DRIVER','mysql');
-    define('DB_HOST','localhost');
-    define('DB_NAME','gbphp');
-    define('DB_USER','worker');
-    define('DB_PASSWORD','getData');
-    define('DB_CONNCT_STR',DB_DRIVER . ':host='. DB_HOST . ';dbname=' . DB_NAME);
- */    
     class Db
     {
         const DB_DRIVER = 'mysql';
@@ -44,7 +37,7 @@
    
             $dbrequest = $this->db->prepare($this->sql);
             $dbrequest->execute($markers); 
-            return $dbrequest->rowCount();
+            return (int)$dbrequest->rowCount();
         }
 
         public function delete(){

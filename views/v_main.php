@@ -26,7 +26,11 @@
 		<div id="menu" class="menu">
 			<a href="index.php">Читать текст</a> |
 			<a href="index.php?c=page&action=edit">Редактировать текст</a> |
+			<?php if(!$userLogin): ?>
 			<a href="index.php?c=User">Вход</a>
+			<?php else: ?>
+			<a href="index.php?c=User&action=logout">Выход  <?=$userLogin?> </a>
+			<?php endif; ?>
 		</div>
 		
 		<div id="content" class="content">

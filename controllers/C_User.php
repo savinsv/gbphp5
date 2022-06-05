@@ -12,53 +12,64 @@ class C_User extends C_Base
 	public $user;
 	function __construct(){
 		$this->user = new M_User();
+		session_start();
 	}
 
 	public function action_index(){
-		$this->title .= '::Авторизация';
-		if (isset($_POST)){
-			$this->action_auth();
+		if ($_SESSION['user_id']){
+			$this->action_info();
 		} else {
-			$this->content = $this->Template('views/v_userAuth.php');
+			$this->action_auth();
 		}
 	}
+
 	public function action_auth(){
 		$this->title .= '::Авторизация';
-		$info = "Пользователь не авторизован";
-        if($_POST){
-            $login = $_POST['l'];
-			$password = $_POST['p'];
-            $info .= "<br>".$this->user->auth($login,$password);
-		    $this->content = $this->Template('views/v_user.php', array('text' => $info));
+		$info = "Требуется авторизация. Введите логин и пароль..";
+		$this->content = $this->Template('views/v_userAuth.php', array('text' => $info));
+		if($_POST){
+			$pars = [];
+			foreach($_POST as $key => $value){
+				$pars[$key] = strip_tags($value);
+			}
+			$result = $this->user->auth($pars);
+			if ($result){
+				$this->action_info();	
+			} else {
+				$info = "<h3>Не верный login или пароль, либо пользователя с {$pars['login']} не существует</h3>" ;
+				$this->content = $this->Template("views/v_userAuth.php", array('text' => $info));	
+			}
 		}
-		else{
-		   $login = $_GET['l'];
-		   $password = $_GET['p'];
-		   $info = $this->user->auth($login,$password);
-		   $this->content = $this->Template('views/v_userAuth.php', array('text' => $info));
-
-		}
-
-
-		/**/	
 	}
+
 	public function action_reg(){
 		$this->title .= " :: Регистрация";
-		$pars = [];
+		$info = "Введите данные для регистрации нового пользователя.";
+		$this->content = $this->Template('views/v_userReg.php', array('text' => $info));
 		if($_POST){
+			$pars = [];
 			foreach($_POST as $key => $value){
-				$pars[$key] = $value;
+				$pars[$key] = strip_tags($value);
 			}
-            
 			$info = $this->user->new($pars);
 		    $this->content = $this->Template('views/v_user.php', array('text' => $info));
-
+		} 
+	}
+	public function action_logout(){
+		$logout = $this->user->logout();
+		if ($logout){
+			$this->userLogin ='';
+			header('Location: index.php?c=User');
+			$this->action_auth();
 		} else {
-			$this->content = $this->Template('views/v_userReg.php', array('text' => $info));
-		}	
+			header('Location: index.php');
+		}
 	}
-	public function action_logOut(){
-
+	public function action_info(){
+		$this->title .='::Информация о пользователе';
+		$id = $_SESSION['user_id'];
+		$this->userLogin = ' [ ' .$this->user->getUserLogin($id) . ' ]';
+		$info = $this->user->info($id);
+		$this->content = $this->Template('views/v_userInfo.php', array('text' => $info));	
 	}
-
 }
