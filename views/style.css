@@ -44,8 +44,11 @@ body {
   border-color: #f00;
   outline: 0.2px solid #f00;
 }
-.menu{
+.menu {
   font-size: 1.2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 a {
@@ -76,6 +79,9 @@ textarea {
 
 #menu {
   padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+
   background: #ccc;
 }
 

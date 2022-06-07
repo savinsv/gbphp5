@@ -24,13 +24,22 @@
 		</div>
 		
 		<div id="menu" class="menu">
-			<a href="index.php">Читать текст</a> |
-			<a href="index.php?c=page&action=edit">Редактировать текст</a> |
-			<?php if(!$userLogin): ?>
-			<a href="index.php?c=User">Вход</a>
-			<?php else: ?>
-			<a href="index.php?c=User&action=logout">Выход  <?=$userLogin?> </a>
-			<?php endif; ?>
+			<div class="left-side">
+				<a href="index.php">Каталог</a> |
+				<a href="index.php?c=cart">Корзина</a> |
+
+<!-- 				<a href="index.php">Читать текст</a> |
+				<a href="index.php?c=page&action=edit">Редактировать текст</a> |
+ -->
+			</div>
+			<div class="right-side">
+				<?php if(!$userLogin): ?>
+				<a href="index.php?c=User">Вход</a>
+				<?php else: ?>
+				<a href="#" > Кабинет</a> |
+				<a href="index.php?c=User&action=logout">Выход  <?=$userLogin?> </a>
+				<?php endif; ?>
+			</div>
 		</div>
 		
 		<div id="content" class="content">

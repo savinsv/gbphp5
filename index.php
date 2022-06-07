@@ -27,13 +27,20 @@ $action .=(isset($_GET['action'])) ? $_GET['action'] : 'index';
 
 switch ($_GET['c'])
 {
-	case 'articles':
+	case 'catalog':
+		$controller = new C_Catalog();
+		break;
+	case 'page':
 		$controller = new C_Page();
+		break;
+	case 'cart':
+		$controller = new C_Cart();
+		break;
 	case 'User':
 		$controller = new C_User();
 		break;
 	default:
-		$controller = new C_Page();
+		$controller = new C_Catalog();
 }
 
 $controller->Request($action);
